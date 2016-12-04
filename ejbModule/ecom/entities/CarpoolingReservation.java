@@ -1,22 +1,28 @@
 package ecom.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the CarpoolingReservation database table.
- * 
+ *
  */
 @Entity
-@NamedQuery(name="CarpoolingReservation.findAll", query="SELECT c FROM CarpoolingReservation c")
+@Table(name = "CarpoolingReservation")
+@NamedQuery(name = "CarpoolingReservation.findAll", query = "SELECT c FROM CarpoolingReservation c")
 public class CarpoolingReservation implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateReserved;
@@ -24,50 +30,54 @@ public class CarpoolingReservation implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date day;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+
 	private int reservedSeats;
 
-	//bi-directional many-to-one association to User
+	// bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="reservedFor")
+	@JoinColumn(name = "reservedFor")
 	private User user;
 
 	public CarpoolingReservation() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public Date getDateReserved() {
 		return this.dateReserved;
 	}
 
-	public void setDateReserved(Date dateReserved) {
-		this.dateReserved = dateReserved;
-	}
-
 	public Date getDay() {
 		return this.day;
 	}
 
-	public void setDay(Date day) {
-		this.day = day;
+	public int getId() {
+		return this.id;
 	}
 
 	public int getReservedSeats() {
 		return this.reservedSeats;
 	}
 
-	public void setReservedSeats(int reservedSeats) {
-		this.reservedSeats = reservedSeats;
-	}
-
 	public User getUser() {
 		return this.user;
+	}
+
+	public void setDateReserved(Date dateReserved) {
+		this.dateReserved = dateReserved;
+	}
+
+	public void setDay(Date day) {
+		this.day = day;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setReservedSeats(int reservedSeats) {
+		this.reservedSeats = reservedSeats;
 	}
 
 	public void setUser(User user) {

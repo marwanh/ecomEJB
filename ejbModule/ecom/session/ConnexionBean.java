@@ -25,7 +25,6 @@ public class ConnexionBean implements ConnexionBeanLocal {
 	 * Default constructor.
 	 */
 	public ConnexionBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public User ConnectClient(String mail, String pwd) {
@@ -36,9 +35,6 @@ public class ConnexionBean implements ConnexionBeanLocal {
 		User u = (User) q.getSingleResult();
 
 		if (u != null && BCrypt.checkpw(pwd, u.getPasswdHash())) {
-			u.setCarpoolingReservations(null);
-			u.setTaxiReservations(null);
-			u.setPasswdHash("");
 			return u;
 		} else {
 			return null;
@@ -52,9 +48,11 @@ public class ConnexionBean implements ConnexionBeanLocal {
 
 		q.setParameter("userEmail", email);
 
-		User ures = (User) q.getSingleResult();
+		try {
+			User ures = (User) q.getSingleResult();
 
-		if (ures == null) {
+			return null;
+		} catch (Exception e) {
 			User u = new User();
 
 			u.setAccountCreationDate(new Date());
@@ -71,17 +69,8 @@ public class ConnexionBean implements ConnexionBeanLocal {
 
 			emanager.persist(u);
 
-			ures = ConnectClient(email, pwd);
-
-			ures.setCarpoolingReservations(null);
-			ures.setTaxiReservations(null);
-			ures.setPasswdHash("");
-
-			return ures;
-		} else {
-			return null;
+			return u;
 		}
-
 	}
 
 }
