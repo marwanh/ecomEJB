@@ -2,6 +2,7 @@ package ecom.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +35,9 @@ public class PredefinedJourney implements Serializable {
 	@JoinColumn(name = "car")
 	private Car carBean;
 
+	@OneToMany(mappedBy = "journey")
+	private List<CarpoolingReservation> carpoolingReservations;
+
 	private String days;
 
 	private String departureCity;
@@ -55,6 +60,14 @@ public class PredefinedJourney implements Serializable {
 	public PredefinedJourney() {
 	}
 
+	public CarpoolingReservation addCarpoolingReservation(
+			CarpoolingReservation carpoolingReservation) {
+		getCarpoolingReservations().add(carpoolingReservation);
+		carpoolingReservation.setJourney(this);
+
+		return carpoolingReservation;
+	}
+
 	public String getArrivalCity() {
 		return this.arrivalCity;
 	}
@@ -65,6 +78,10 @@ public class PredefinedJourney implements Serializable {
 
 	public Car getCarBean() {
 		return this.carBean;
+	}
+
+	public List<CarpoolingReservation> getCarpoolingReservations() {
+		return this.carpoolingReservations;
 	}
 
 	public String getDays() {
@@ -99,6 +116,14 @@ public class PredefinedJourney implements Serializable {
 		return this.serviceEnd;
 	}
 
+	public CarpoolingReservation removeCarpoolingReservation(
+			CarpoolingReservation carpoolingReservation) {
+		getCarpoolingReservations().remove(carpoolingReservation);
+		carpoolingReservation.setJourney(null);
+
+		return carpoolingReservation;
+	}
+
 	public void setArrivalCity(String arrivalCity) {
 		this.arrivalCity = arrivalCity;
 	}
@@ -109,6 +134,11 @@ public class PredefinedJourney implements Serializable {
 
 	public void setCarBean(Car carBean) {
 		this.carBean = carBean;
+	}
+
+	public void setCarpoolingReservations(
+			List<CarpoolingReservation> carpoolingReservations) {
+		this.carpoolingReservations = carpoolingReservations;
 	}
 
 	public void setDays(String days) {

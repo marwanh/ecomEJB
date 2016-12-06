@@ -34,6 +34,10 @@ public class CarpoolingReservation implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@ManyToOne
+	@JoinColumn(name = "journey")
+	private PredefinedJourney journey;
+
 	private int reservedSeats;
 
 	// bi-directional many-to-one association to User
@@ -56,6 +60,10 @@ public class CarpoolingReservation implements Serializable {
 		return this.id;
 	}
 
+	public PredefinedJourney getJourney() {
+		return this.journey;
+	}
+
 	public int getReservedSeats() {
 		return this.reservedSeats;
 	}
@@ -74,6 +82,10 @@ public class CarpoolingReservation implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public void setJourney(PredefinedJourney journey) {
+		this.journey = journey;
 	}
 
 	public void setReservedSeats(int reservedSeats) {
