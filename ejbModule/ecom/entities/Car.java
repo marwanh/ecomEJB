@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,11 +18,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Car")
-@NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c")
+@NamedQueries({
+		@NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c"),
+		@NamedQuery(name = "Car.findAllTaxi", query = "SELECT c FROM Car c WHERE c.taxi = 1"),
+		@NamedQuery(name = "Car.findAllCarpooling", query = "SELECT c FROM Car c WHERE c.taxi = 0") })
 public class Car implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private byte available;
+	private boolean available;
 
 	private String currentLocation;
 
@@ -37,7 +41,7 @@ public class Car implements Serializable {
 
 	private int seats;
 
-	private byte taxi;
+	private boolean taxi;
 
 	// bi-directional many-to-one association to TaxiReservation
 	@OneToMany(mappedBy = "carBean")
@@ -61,7 +65,7 @@ public class Car implements Serializable {
 		return taxiReservation;
 	}
 
-	public byte getAvailable() {
+	public boolean getAvailable() {
 		return this.available;
 	}
 
@@ -85,7 +89,7 @@ public class Car implements Serializable {
 		return this.seats;
 	}
 
-	public byte getTaxi() {
+	public boolean getTaxi() {
 		return this.taxi;
 	}
 
@@ -108,7 +112,7 @@ public class Car implements Serializable {
 		return taxiReservation;
 	}
 
-	public void setAvailable(byte available) {
+	public void setAvailable(boolean available) {
 		this.available = available;
 	}
 
@@ -132,7 +136,7 @@ public class Car implements Serializable {
 		this.seats = seats;
 	}
 
-	public void setTaxi(byte taxi) {
+	public void setTaxi(boolean taxi) {
 		this.taxi = taxi;
 	}
 

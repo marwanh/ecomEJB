@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,7 +21,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "CarpoolingReservation")
-@NamedQuery(name = "CarpoolingReservation.findAll", query = "SELECT c FROM CarpoolingReservation c")
+@NamedQueries({
+		@NamedQuery(name = "CarpoolingReservation.findAll", query = "SELECT c FROM CarpoolingReservation c"),
+		@NamedQuery(name = "CarpoolingReservation.countByJourneyAndDate", query = "SELECT COUNT(c) FROM CarpoolingReservation c WHERE c.journey.id = :journeyId AND c.day = :date") })
 public class CarpoolingReservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
