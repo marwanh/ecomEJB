@@ -1,0 +1,26 @@
+* Installation
+
+# data nodes must be launched before sql nodes
+
+# ecom2:
+# launch management node
+sudo docker run -d --name ndb_mgmd01 --net=host -p 10.0.0.10:1186:1186 -v /home/marwan/MySQL-Cluster/config.ini:/etc/mysql-cluster.ini:ro h3nrik/mysql-cluster ndb_mgmd
+
+# launch data node
+sudo docker run -d --name ndbd01 --net=host h3nrik/mysql-cluster ndbd 10.0.0.10
+
+# launch sql node
+sudo docker run -d --name mysqld01 --net=host -p 10.0.0.10:3306:3306 h3nrik/mysql-cluster mysqld 10.0.0.10
+
+# ecom3:
+# launch  data node
+sudo docker run -d --name ndbd02 --net=host h3nrik/mysql-cluster ndbd 10.0.0.10
+
+# launch sql node
+sudo docker run -d --name mysqld02 --net=host -p 10.0.0.11:3306:3306 h3nrik/mysql-cluster mysqld 10.0.0.10
+
+
+* Accessing the management node
+
+# ecom2:
+sudo docker run -it --rm --name ndb_mgm h3nrik/mysql-cluster ndb_mgm 10.0.0.10
