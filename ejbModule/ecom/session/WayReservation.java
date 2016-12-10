@@ -146,6 +146,7 @@ public class WayReservation implements WayReservationLocal {
 
 				TaxiReservation trr = new TaxiReservation();
 
+				trr.setDateReserved(new Date());
 				trr.setArrivalCity(arrivalCity);
 				trr.setArrivalLocation(arrivalLocation);
 				trr.setCarBean(c);
