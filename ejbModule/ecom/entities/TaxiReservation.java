@@ -3,6 +3,7 @@ package ecom.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,9 +30,12 @@ public class TaxiReservation implements Serializable {
 	private String arrivalLocation;
 
 	// bi-directional many-to-one association to Car
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "car")
 	private Car carBean;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateReserved;
 
 	private String departureCity;
 
@@ -49,7 +53,7 @@ public class TaxiReservation implements Serializable {
 	private float price;
 
 	// bi-directional many-to-one association to User
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "reservedFor")
 	private User user;
 
@@ -66,6 +70,10 @@ public class TaxiReservation implements Serializable {
 
 	public Car getCarBean() {
 		return this.carBean;
+	}
+
+	public Date getDateReserved() {
+		return dateReserved;
 	}
 
 	public String getDepartureCity() {
@@ -106,6 +114,10 @@ public class TaxiReservation implements Serializable {
 
 	public void setCarBean(Car carBean) {
 		this.carBean = carBean;
+	}
+
+	public void setDateReserved(Date dateReserved) {
+		this.dateReserved = dateReserved;
 	}
 
 	public void setDepartureCity(String departureCity) {

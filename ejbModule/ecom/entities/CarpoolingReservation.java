@@ -3,6 +3,7 @@ package ecom.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,14 +38,14 @@ public class CarpoolingReservation implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "journey")
 	private PredefinedJourney journey;
 
 	private int reservedSeats;
 
 	// bi-directional many-to-one association to User
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "reservedFor")
 	private User user;
 

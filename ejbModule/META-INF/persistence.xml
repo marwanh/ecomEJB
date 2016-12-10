@@ -8,8 +8,5 @@
 		<class>ecom.entities.PredefinedJourney</class>
 		<class>ecom.entities.TaxiReservation</class>
 		<class>ecom.entities.User</class>
-		<properties>
-			<property name="eclipselink.ddl-generation" value="create-tables"/>
-		</properties>
 	</persistence-unit>
 </persistence>

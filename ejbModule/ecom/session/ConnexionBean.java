@@ -27,6 +27,7 @@ public class ConnexionBean implements ConnexionBeanLocal {
 	public ConnexionBean() {
 	}
 
+	@Override
 	public User ConnectClient(String mail, String pwd) {
 		Query q = emanager.createNamedQuery("User.findByEmail");
 
@@ -41,6 +42,7 @@ public class ConnexionBean implements ConnexionBeanLocal {
 		}
 	}
 
+	@Override
 	public User CreateUser(String address, String firstName, String lastName,
 			Date birthDate, String city, String country, String email,
 			String pwd, String phone, String zip) {
@@ -68,6 +70,10 @@ public class ConnexionBean implements ConnexionBeanLocal {
 			u.setZip(zip);
 
 			emanager.persist(u);
+
+			emanager.flush();
+
+			emanager.refresh(u);
 
 			return u;
 		}
