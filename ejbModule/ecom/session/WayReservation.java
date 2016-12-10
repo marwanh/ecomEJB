@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
+import ecom.entities.Admin;
 import ecom.entities.Car;
 import ecom.entities.CarpoolingReservation;
 import ecom.entities.PredefinedJourney;
@@ -31,6 +33,13 @@ public class WayReservation implements WayReservationLocal {
 	 */
 	public WayReservation() {
 		// TODO Auto-generated constructor stub
+	}
+
+	@Schedule(second = "*", minute = "*/1", hour = "*")
+	public void traiterTrenteSecondes() {
+		Query q = emanager.createNamedQuery("Admin.findAll");
+
+		List<Admin> a = q.getResultList();
 	}
 
 	@Override
