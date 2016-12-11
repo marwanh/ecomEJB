@@ -24,7 +24,8 @@ import javax.persistence.TemporalType;
 @Table(name = "CarpoolingReservation")
 @NamedQueries({
 		@NamedQuery(name = "CarpoolingReservation.findAll", query = "SELECT c FROM CarpoolingReservation c"),
-		@NamedQuery(name = "CarpoolingReservation.countByJourneyAndDate", query = "SELECT COUNT(c) FROM CarpoolingReservation c WHERE c.journey.id = :journeyId AND c.day = :date") })
+		@NamedQuery(name = "CarpoolingReservation.countByJourneyAndDate", query = "SELECT COUNT(c) FROM CarpoolingReservation c WHERE c.journey.id = :journeyId AND c.day = :date"),
+		@NamedQuery(name = "CarpoolingReservation.findByUserId", query = "SELECT c FROM CarpoolingReservation c WHERE c.user.id = :userId") })
 public class CarpoolingReservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
