@@ -43,8 +43,6 @@ public class WayFinder implements WayFinderLocal {
 
 		List<PredefinedJourney> alp = q.getResultList();
 
-		System.out.println("TAILLE CARPOOLING : " + alp.size());
-
 		ArrayList<PredefinedJourney> res = new ArrayList<PredefinedJourney>();
 
 		String[] s;
