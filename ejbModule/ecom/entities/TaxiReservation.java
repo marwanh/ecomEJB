@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "TaxiReservation")
 @NamedQueries({
 		@NamedQuery(name = "TaxiReservation.findAll", query = "SELECT t FROM TaxiReservation t"),
-		@NamedQuery(name = "TaxiReservation.findByUserId", query = "SELECT t FROM TaxiReservation t WHERE t.user.id = :userId") })
+		@NamedQuery(name = "TaxiReservation.findByUserId", query = "SELECT t FROM TaxiReservation t WHERE t.user.id = :userId ORDER BY t.dateReserved DESC") })
 public class TaxiReservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
