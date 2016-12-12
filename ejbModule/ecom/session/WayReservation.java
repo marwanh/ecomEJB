@@ -100,8 +100,6 @@ public class WayReservation implements WayReservationLocal {
 
 			ltr = c.getTaxiReservations();
 
-			System.out.println("Number of reservation : " + ltr.size());
-
 			a = true;
 
 			for (TaxiReservation tr : ltr) {
