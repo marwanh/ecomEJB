@@ -47,7 +47,6 @@ public class WayFinder implements WayFinderLocal {
 
 		String[] s;
 		String day = Integer.toString(departure.getDay());
-		System.out.println("JOUR : " + day);
 
 		for (PredefinedJourney pj : alp) {
 			s = pj.getDepartureLocation().split(";");
